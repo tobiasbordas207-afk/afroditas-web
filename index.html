@@ -1,85 +1,232 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Afroditas Lencería</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Afroditas Lencería</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:#fff5f8;
+}
+
+/* HEADER */
+header{
+    background:#ff3d7f;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+/* HERO */
+.hero{
+    text-align:center;
+    padding:40px;
+    background:linear-gradient(90deg,#ff6fa1,#ff3d7f);
+    color:white;
+}
+
+/* FILTROS */
+.filtros{
+    text-align:center;
+    margin:20px;
+}
+
+.filtros button{
+    margin:5px;
+    padding:10px 15px;
+    border:none;
+    background:#ff3d7f;
+    color:white;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+/* LAYOUT */
+.contenedor{
+    display:flex;
+}
+
+/* PRODUCTOS */
+.productos{
+    flex:3;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:15px;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    border-radius:10px;
+    text-align:center;
+    padding:10px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+.card img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+.card a, .card button{
+    display:block;
+    margin-top:8px;
+    padding:8px;
+    background:#ff3d7f;
+    color:white;
+    text-decoration:none;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+/* CARRITO */
+.carrito{
+    flex:1;
+    background:white;
+    padding:15px;
+    border-left:2px solid #ffd1e0;
+    position:sticky;
+    top:0;
+    height:100vh;
+    overflow:auto;
+}
+
+.item{
+    border-bottom:1px solid #eee;
+    padding:10px 0;
+}
+
+.total{
+    font-weight:bold;
+    color:#ff3d7f;
+    margin-top:10px;
+}
+</style>
 </head>
 
 <body>
 
 <header>
-    <h1>Afroditas Lencería</h1>
-    <p>Elegancia divina ✨</p>
+<h1>Afroditas Lencería</h1>
+<p>Elegancia divina ✨</p>
 </header>
 
 <section class="hero">
-    <h2>Despierta tu diosa interior</h2>
+<h2>Despierta tu diosa interior</h2>
 </section>
 
-<!-- BOTONES DE CATEGORÍAS -->
 <section class="filtros">
-    <button onclick="filtrar('todos')">Todos</button>
-    <button onclick="filtrar('conjuntos')">Conjuntos</button>
-    <button onclick="filtrar('bombachas')">Bombachas</button>
+<button onclick="filtrar('todos')">Todos</button>
+<button onclick="filtrar('conjuntos')">Conjuntos</button>
+<button onclick="filtrar('bombachas')">Bombachas</button>
 </section>
+
+<div class="contenedor">
 
 <!-- PRODUCTOS -->
 <section class="productos">
 
-    <div class="card conjuntos">
-        <img src="milan.jpeg">
-        <h3>Conjunto Milan</h3>
-        <p>$8000</p>
-        <a href="https://wa.me/543794553932?text=Quiero%20Conjunto%20Milan">Comprar</a>
-    </div>
+<div class="card conjuntos">
+<img src="milan.jpeg">
+<h3>Conjunto Milan</h3>
+<p>$8000</p>
+<button onclick="agregar('Conjunto Milan',8000)">Agregar al carrito</button>
+<a href="https://wa.me/5493794553932?text=Quiero%20Conjunto%20Milan">Comprar WhatsApp</a>
+</div>
 
-    <div class="card conjuntos">
-        <img src="basic.jpeg">
-        <h3>Conjunto Basic</h3>
-        <p>$6000</p>
-        <a href="https://wa.me/543794553932?text=Quiero%20Conjunto%20Basic">Comprar</a>
-    </div>
+<div class="card conjuntos">
+<img src="basic.jpeg">
+<h3>Conjunto Basic</h3>
+<p>$6000</p>
+<button onclick="agregar('Conjunto Basic',6000)">Agregar al carrito</button>
+<a href="https://wa.me/5493794553932?text=Quiero%20Conjunto%20Basic">Comprar WhatsApp</a>
+</div>
 
-    <div class="card bombachas">
-        <img src="vedetina.jpeg">
-        <h3>Vedetina</h3>
-        <p>$3000 o 3x $7500</p>
-        <a href="https://wa.me/543794553932?text=Quiero%20Vedetina">Comprar</a>
-    </div>
+<div class="card bombachas">
+<img src="vedetina.jpeg">
+<h3>Vedetina</h3>
+<p>$3000</p>
+<button onclick="agregar('Vedetina',3000)">Agregar al carrito</button>
+<a href="https://wa.me/5493794553932?text=Quiero%20Vedetina">Comprar WhatsApp</a>
+</div>
 
-    <div class="card bombachas">
-        <img src="colaless.jpeg">
-        <h3>Colaless</h3>
-        <p>$3000 o 3x $7500</p>
-        <a href="https://wa.me/543794553932?text=Quiero%20Colaless">Comprar</a>
-    </div>
-
-    <div class="card bombachas">
-        <img src="regulables.jpeg">
-        <h3>Regulables</h3>
-        <p>$3000 o 3x $7500</p>
-        <a href="https://wa.me/543794553932?text=Quiero%20Regulables">Comprar</a>
-    </div>
+<div class="card bombachas">
+<img src="colaless.jpeg">
+<h3>Colaless</h3>
+<p>$3000</p>
+<button onclick="agregar('Colaless',3000)">Agregar al carrito</button>
+<a href="https://wa.me/5493794553932?text=Quiero%20Colaless">Comprar WhatsApp</a>
+</div>
 
 </section>
 
+<!-- CARRITO -->
+<aside class="carrito">
+<h2>🛒 Carrito</h2>
+<div id="items"></div>
+<div class="total" id="total">Total: $0</div>
+</aside>
+
+</div>
+
 <script>
-function filtrar(categoria) {
+
+/* FILTRO */
+function filtrar(categoria){
     let productos = document.querySelectorAll('.card');
 
-    productos.forEach(p => {
-        if (categoria === 'todos') {
-            p.style.display = 'inline-block';
+    productos.forEach(p=>{
+        if(categoria === 'todos'){
+            p.style.display='block';
         } else {
-            if (p.classList.contains(categoria)) {
-                p.style.display = 'inline-block';
-            } else {
-                p.style.display = 'none';
-            }
+            p.style.display = p.classList.contains(categoria) ? 'block' : 'none';
         }
     });
 }
+
+/* CARRITO */
+let carrito = [];
+
+function agregar(nombre,precio){
+
+    let item = carrito.find(p => p.nombre === nombre);
+
+    if(item){
+        item.cantidad++;
+    } else {
+        carrito.push({nombre,precio,cantidad:1});
+    }
+
+    render();
+}
+
+function render(){
+
+    let cont = document.getElementById("items");
+    cont.innerHTML = "";
+
+    let total = 0;
+
+    carrito.forEach(i=>{
+        total += i.precio * i.cantidad;
+
+        cont.innerHTML += `
+        <div class="item">
+            <b>${i.nombre}</b><br>
+            Cantidad: ${i.cantidad}<br>
+            Subtotal: $${i.precio * i.cantidad}
+        </div>
+        `;
+    });
+
+    document.getElementById("total").innerText = "Total: $" + total;
+}
+
 </script>
 
 </body>
