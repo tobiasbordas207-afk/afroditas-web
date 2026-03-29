@@ -22,12 +22,12 @@ header{
 /* HERO */
 .hero{
     text-align:center;
-    padding:50px;
+    padding:40px;
     background:linear-gradient(90deg,#ff6fa1,#ff3d7f);
     color:white;
 }
 
-/* FILTROS */
+/* BOTONES FILTRO */
 .filtros{
     text-align:center;
     margin:20px;
@@ -39,33 +39,31 @@ header{
     border:none;
     background:#ff3d7f;
     color:white;
+    border-radius:6px;
     cursor:pointer;
-    border-radius:5px;
 }
 
-/* LAYOUT */
+/* CONTENEDOR GENERAL */
 .contenedor{
     display:flex;
-    gap:10px;
 }
 
-/* PRODUCTOS GRID (MEJORADO) */
+/* PRODUCTOS */
 .productos{
     flex:3;
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
     gap:20px;
     padding:20px;
 }
 
-/* CARD MÁS BONITA */
+/* CARD */
 .card{
     background:white;
     border-radius:15px;
     overflow:hidden;
-    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
     text-align:center;
-    padding-bottom:10px;
     transition:0.3s;
 }
 
@@ -80,7 +78,7 @@ header{
 }
 
 .card h3{
-    margin:10px 0 5px;
+    margin:10px 0;
 }
 
 .card p{
@@ -88,24 +86,14 @@ header{
     font-weight:bold;
 }
 
-.card button, .card a{
-    display:block;
-    margin:8px auto;
+.card button{
+    margin:5px;
     padding:8px;
     width:80%;
     border:none;
     border-radius:6px;
     cursor:pointer;
-    text-decoration:none;
-}
-
-.card button{
     background:#ff3d7f;
-    color:white;
-}
-
-.card a{
-    background:#25d366;
     color:white;
 }
 
@@ -131,7 +119,6 @@ header{
     color:#ff3d7f;
     margin-top:10px;
 }
-
 </style>
 </head>
 
@@ -139,11 +126,10 @@ header{
 
 <header>
 <h1>Afroditas Lencería</h1>
-<p>Elegancia divina ✨</p>
 </header>
 
 <section class="hero">
-<h2>Despierta tu diosa interior</h2>
+<h2>Tu tienda divina ✨</h2>
 </section>
 
 <section class="filtros">
@@ -161,40 +147,28 @@ header{
 <img src="milan.jpeg">
 <h3>Conjunto Milan</h3>
 <p>$8000</p>
-<button onclick="agregar('Conjunto Milan',8000)">Agregar al carrito</button>
-<a href="https://wa.me/5493794553932?text=Quiero%20Conjunto%20Milan">Comprar WhatsApp</a>
+<button onclick="agregar('Conjunto Milan',8000)">Agregar</button>
 </div>
 
 <div class="card conjuntos">
 <img src="basic.jpeg">
 <h3>Conjunto Basic</h3>
 <p>$6000</p>
-<button onclick="agregar('Conjunto Basic',6000)">Agregar al carrito</button>
-<a href="https://wa.me/5493794553932?text=Quiero%20Conjunto%20Basic">Comprar WhatsApp</a>
+<button onclick="agregar('Conjunto Basic',6000)">Agregar</button>
 </div>
 
 <div class="card bombachas">
 <img src="vedetina.jpeg">
 <h3>Vedetina</h3>
 <p>$3000</p>
-<button onclick="agregar('Vedetina',3000)">Agregar al carrito</button>
-<a href="https://wa.me/5493794553932?text=Quiero%20Vedetina">Comprar WhatsApp</a>
+<button onclick="agregar('Vedetina',3000)">Agregar</button>
 </div>
 
 <div class="card bombachas">
 <img src="colaless.jpeg">
 <h3>Colaless</h3>
 <p>$3000</p>
-<button onclick="agregar('Colaless',3000)">Agregar al carrito</button>
-<a href="https://wa.me/5493794553932?text=Quiero%20Colaless">Comprar WhatsApp</a>
-</div>
-
-<div class="card bombachas">
-<img src="regulables.jpeg">
-<h3>Regulables</h3>
-<p>$3000</p>
-<button onclick="agregar('Regulables',3000)">Agregar al carrito</button>
-<a href="https://wa.me/5493794553932?text=Quiero%20Regulables">Comprar WhatsApp</a>
+<button onclick="agregar('Colaless',3000)">Agregar</button>
 </div>
 
 </section>
@@ -202,46 +176,17 @@ header{
 <!-- CARRITO -->
 <aside class="carrito">
 <h2>🛒 Carrito</h2>
-
-<div id="items"></div>
-
+<div id="carrito"></div>
 <div class="total" id="total">Total: $0</div>
-
-<button onclick="finalizarCompra()" style="
-margin-top:10px;
-width:100%;
-padding:10px;
-background:#25d366;
-color:white;
-border:none;
-border-radius:5px;
-cursor:pointer;
-">
-Finalizar compra
-</button>
-
 </aside>
 
 </div>
 
 <script>
 
-/* FILTRO */
-function filtrar(categoria){
-    let productos = document.querySelectorAll('.card');
-
-    productos.forEach(p=>{
-        if(categoria === 'todos'){
-            p.style.display='block';
-        } else {
-            p.style.display = p.classList.contains(categoria) ? 'block' : 'none';
-        }
-    });
-}
-
-/* CARRITO */
 let carrito = [];
 
+/* AGREGAR AL CARRITO (ARREGLADO) */
 function agregar(nombre,precio){
 
     let item = carrito.find(p => p.nombre === nombre);
@@ -255,9 +200,10 @@ function agregar(nombre,precio){
     render();
 }
 
+/* MOSTRAR CARRITO */
 function render(){
 
-    let cont = document.getElementById("items");
+    let cont = document.getElementById("carrito");
     cont.innerHTML = "";
 
     let total = 0;
@@ -268,8 +214,8 @@ function render(){
         cont.innerHTML += `
         <div class="item">
             <b>${i.nombre}</b><br>
-            Cant: ${i.cantidad}<br>
-            Sub: $${i.precio * i.cantidad}
+            Cantidad: ${i.cantidad}<br>
+            Subtotal: $${i.precio * i.cantidad}
         </div>
         `;
     });
@@ -277,20 +223,18 @@ function render(){
     document.getElementById("total").innerText = "Total: $" + total;
 }
 
-/* FINALIZAR COMPRA */
-function finalizarCompra(){
+/* FILTRO (ARREGLADO) */
+function filtrar(tipo){
 
-    let mensaje = "Hola! quiero comprar:%0A";
+    let productos = document.querySelectorAll(".card");
 
-    carrito.forEach(i=>{
-        mensaje += `- ${i.nombre} x${i.cantidad}%0A`;
+    productos.forEach(p=>{
+        if(tipo === "todos"){
+            p.style.display = "block";
+        } else {
+            p.style.display = p.classList.contains(tipo) ? "block" : "none";
+        }
     });
-
-    let total = carrito.reduce((a,b)=>a + b.precio*b.cantidad,0);
-
-    mensaje += `%0ATotal: $${total}`;
-
-    window.open("https://wa.me/5493794553932?text=" + mensaje, "_blank");
 }
 
 </script>
