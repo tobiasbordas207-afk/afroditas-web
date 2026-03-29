@@ -114,6 +114,7 @@ header{
 <header>
 <h1>Afroditas Lencería</h1>
 <p>Elegancia divina ✨</p>
+<div>🛒 Carrito (<span id="count">0</span>)</div>
 </header>
 
 <section class="hero">
@@ -163,13 +164,36 @@ header{
 <a href="https://wa.me/5493794553932?text=Quiero%20Colaless">Comprar WhatsApp</a>
 </div>
 
+<div class="card bombachas">
+<img src="regulables.jpeg">
+<h3>Regulables</h3>
+<p>$3000</p>
+<button onclick="agregar('Regulables',3000)">Agregar al carrito</button>
+<a href="https://wa.me/5493794553932?text=Quiero%20Regulables">Comprar WhatsApp</a>
+</div>
+    
 </section>
 
-<!-- CARRITO -->
 <aside class="carrito">
 <h2>🛒 Carrito</h2>
+
 <div id="items"></div>
+
 <div class="total" id="total">Total: $0</div>
+
+<button onclick="finalizarCompra()" style="
+margin-top:10px;
+width:100%;
+padding:10px;
+background:#25d366;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+">
+Finalizar compra por WhatsApp
+</button>
+
 </aside>
 
 </div>
@@ -190,7 +214,13 @@ function filtrar(categoria){
 }
 
 /* CARRITO */
-let carrito = [];
+<script>
+
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+function guardar(){
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+}
 
 function agregar(nombre,precio){
 
@@ -202,6 +232,13 @@ function agregar(nombre,precio){
         carrito.push({nombre,precio,cantidad:1});
     }
 
+    guardar();
+    render();
+}
+
+function eliminar(nombre){
+    carrito = carrito.filter(p => p.nombre !== nombre);
+    guardar();
     render();
 }
 
@@ -211,23 +248,52 @@ function render(){
     cont.innerHTML = "";
 
     let total = 0;
+    let count = 0;
 
     carrito.forEach(i=>{
         total += i.precio * i.cantidad;
+        count += i.cantidad;
 
         cont.innerHTML += `
         <div class="item">
             <b>${i.nombre}</b><br>
-            Cantidad: ${i.cantidad}<br>
-            Subtotal: $${i.precio * i.cantidad}
+            Cant: ${i.cantidad}<br>
+            Sub: $${i.precio * i.cantidad}<br>
+            <button onclick="eliminar('${i.nombre}')"
+            style="background:red;color:white;border:none;padding:5px;cursor:pointer;">
+            X
+            </button>
         </div>
         `;
     });
 
     document.getElementById("total").innerText = "Total: $" + total;
+    document.getElementById("count").innerText = count;
 }
 
-</script>
+function finalizarCompra(){
 
+    if(carrito.length === 0){
+        alert("El carrito está vacío");
+        return;
+    }
+
+    let mensaje = "Hola! Quiero comprar:%0A";
+
+    carrito.forEach(i=>{
+        mensaje += `- ${i.nombre} x${i.cantidad} ($${i.precio * i.cantidad})%0A`;
+    });
+
+    let total = carrito.reduce((a,b)=>a + b.precio*b.cantidad,0);
+
+    mensaje += `%0ATotal: $${total}`;
+
+    window.open("https://wa.me/5493794553932?text=" + mensaje, "_blank");
+}
+
+/* render inicial */
+render();
+
+</script>
 </body>
 </html>
