@@ -22,7 +22,7 @@ header{
 /* HERO */
 .hero{
     text-align:center;
-    padding:40px;
+    padding:50px;
     background:linear-gradient(90deg,#ff6fa1,#ff3d7f);
     color:white;
 }
@@ -46,42 +46,67 @@ header{
 /* LAYOUT */
 .contenedor{
     display:flex;
+    gap:10px;
 }
 
-/* PRODUCTOS */
+/* PRODUCTOS GRID (MEJORADO) */
 .productos{
     flex:3;
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-    gap:15px;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
     padding:20px;
 }
 
+/* CARD MÁS BONITA */
 .card{
     background:white;
-    border-radius:10px;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
     text-align:center;
-    padding:10px;
-    box-shadow:0 3px 10px rgba(0,0,0,0.1);
+    padding-bottom:10px;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:scale(1.03);
 }
 
 .card img{
     width:100%;
-    height:200px;
+    height:220px;
     object-fit:cover;
-    border-radius:10px;
 }
 
-.card a, .card button{
+.card h3{
+    margin:10px 0 5px;
+}
+
+.card p{
+    color:#ff3d7f;
+    font-weight:bold;
+}
+
+.card button, .card a{
     display:block;
-    margin-top:8px;
+    margin:8px auto;
     padding:8px;
+    width:80%;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    text-decoration:none;
+}
+
+.card button{
     background:#ff3d7f;
     color:white;
-    text-decoration:none;
-    border:none;
-    border-radius:5px;
-    cursor:pointer;
+}
+
+.card a{
+    background:#25d366;
+    color:white;
 }
 
 /* CARRITO */
@@ -106,6 +131,7 @@ header{
     color:#ff3d7f;
     margin-top:10px;
 }
+
 </style>
 </head>
 
@@ -114,7 +140,6 @@ header{
 <header>
 <h1>Afroditas Lencería</h1>
 <p>Elegancia divina ✨</p>
-<div>🛒 Carrito (<span id="count">0</span>)</div>
 </header>
 
 <section class="hero">
@@ -171,9 +196,10 @@ header{
 <button onclick="agregar('Regulables',3000)">Agregar al carrito</button>
 <a href="https://wa.me/5493794553932?text=Quiero%20Regulables">Comprar WhatsApp</a>
 </div>
-    
+
 </section>
 
+<!-- CARRITO -->
 <aside class="carrito">
 <h2>🛒 Carrito</h2>
 
@@ -191,7 +217,7 @@ border:none;
 border-radius:5px;
 cursor:pointer;
 ">
-Finalizar compra por WhatsApp
+Finalizar compra
 </button>
 
 </aside>
@@ -214,13 +240,7 @@ function filtrar(categoria){
 }
 
 /* CARRITO */
-<script>
-
-let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-
-function guardar(){
-    localStorage.setItem("carrito", JSON.stringify(carrito));
-}
+let carrito = [];
 
 function agregar(nombre,precio){
 
@@ -232,13 +252,6 @@ function agregar(nombre,precio){
         carrito.push({nombre,precio,cantidad:1});
     }
 
-    guardar();
-    render();
-}
-
-function eliminar(nombre){
-    carrito = carrito.filter(p => p.nombre !== nombre);
-    guardar();
     render();
 }
 
@@ -248,40 +261,29 @@ function render(){
     cont.innerHTML = "";
 
     let total = 0;
-    let count = 0;
 
     carrito.forEach(i=>{
         total += i.precio * i.cantidad;
-        count += i.cantidad;
 
         cont.innerHTML += `
         <div class="item">
             <b>${i.nombre}</b><br>
             Cant: ${i.cantidad}<br>
-            Sub: $${i.precio * i.cantidad}<br>
-            <button onclick="eliminar('${i.nombre}')"
-            style="background:red;color:white;border:none;padding:5px;cursor:pointer;">
-            X
-            </button>
+            Sub: $${i.precio * i.cantidad}
         </div>
         `;
     });
 
     document.getElementById("total").innerText = "Total: $" + total;
-    document.getElementById("count").innerText = count;
 }
 
+/* FINALIZAR COMPRA */
 function finalizarCompra(){
 
-    if(carrito.length === 0){
-        alert("El carrito está vacío");
-        return;
-    }
-
-    let mensaje = "Hola! Quiero comprar:%0A";
+    let mensaje = "Hola! quiero comprar:%0A";
 
     carrito.forEach(i=>{
-        mensaje += `- ${i.nombre} x${i.cantidad} ($${i.precio * i.cantidad})%0A`;
+        mensaje += `- ${i.nombre} x${i.cantidad}%0A`;
     });
 
     let total = carrito.reduce((a,b)=>a + b.precio*b.cantidad,0);
@@ -291,9 +293,7 @@ function finalizarCompra(){
     window.open("https://wa.me/5493794553932?text=" + mensaje, "_blank");
 }
 
-/* render inicial */
-render();
-
 </script>
+
 </body>
 </html>
