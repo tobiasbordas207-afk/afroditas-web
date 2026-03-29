@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Afroditas Lencería</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>Afroditas Lencería</h1>
+    <p>Elegancia divina ✨</p>
+</header>
+
+<section class="hero">
+    <h2>Despierta tu diosa interior</h2>
+</section>
+
+<!-- BOTONES DE CATEGORÍAS -->
+<section class="filtros">
+    <button onclick="filtrar('todos')">Todos</button>
+    <button onclick="filtrar('conjuntos')">Conjuntos</button>
+    <button onclick="filtrar('bombachas')">Bombachas</button>
+</section>
+
+<!-- PRODUCTOS -->
+<section class="productos">
+
+    <div class="card conjuntos">
+        <img src="milan.jpg">
+        <h3>Conjunto Milan</h3>
+        <p>$8000</p>
+        <a href="https://wa.me/543794553932?text=Quiero%20Conjunto%20Milan">Comprar</a>
+    </div>
+
+    <div class="card conjuntos">
+        <img src="basic.jpg">
+        <h3>Conjunto Basic</h3>
+        <p>$6000</p>
+        <a href="https://wa.me/543794553932?text=Quiero%20Conjunto%20Basic">Comprar</a>
+    </div>
+
+    <div class="card bombachas">
+        <img src="vedetina.jpg">
+        <h3>Vedetina</h3>
+        <p>$3000 o 3x $7500</p>
+        <a href="https://wa.me/543794553932?text=Quiero%20Vedetina">Comprar</a>
+    </div>
+
+    <div class="card bombachas">
+        <img src="colaless.jpg">
+        <h3>Colaless</h3>
+        <p>$3000 o 3x $7500</p>
+        <a href="https://wa.me/543794553932?text=Quiero%20Colaless">Comprar</a>
+    </div>
+
+    <div class="card bombachas">
+        <img src="regulables.jpg">
+        <h3>Regulables</h3>
+        <p>$3000 o 3x $7500</p>
+        <a href="https://wa.me/543794553932?text=Quiero%20Regulables">Comprar</a>
+    </div>
+
+</section>
+
+<script>
+function filtrar(categoria) {
+    let productos = document.querySelectorAll('.card');
+
+    productos.forEach(p => {
+        if (categoria === 'todos') {
+            p.style.display = 'inline-block';
+        } else {
+            if (p.classList.contains(categoria)) {
+                p.style.display = 'inline-block';
+            } else {
+                p.style.display = 'none';
+            }
+        }
+    });
+}
+</script>
+
+</body>
+</html>

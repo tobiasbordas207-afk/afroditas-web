@@ -1,0 +1,123 @@
+/* FUENTE Y BASE */
+body {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    background-color: #f8f5f0; /* beige suave */
+    color: #3a3a3a;
+    text-align: center;
+}
+
+/* HEADER */
+header {
+    background: white;
+    padding: 30px;
+    border-bottom: 2px solid rgba(255, 217, 0, 0.425);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 42px;
+    color: rgba(255, 217, 0, 0.514);
+    letter-spacing: 2px;
+}
+
+header p {
+    font-style: italic;
+    color: #777;
+}
+
+/* HERO */
+.hero {
+    background: linear-gradient(to right, #ffffff, #f5e6c8);
+    padding: 60px 20px;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+/* PRODUCTOS */
+.productos {
+    padding: 40px 20px;
+}
+
+.productos h2 {
+    margin-bottom: 30px;
+    color: #c9a84db9;
+}
+
+/* TARJETAS */
+.card {
+    background: white;
+    border: 1px solid #e0d6c3;
+    margin: 15px;
+    padding: 20px;
+    display: inline-block;
+    width: 220px;
+    border-radius: 15px;
+    transition: 0.3s;
+}
+
+/* EFECTO HOVER (LUJO 😏) */
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.15);
+}
+
+/* IMÁGENES */
+.card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* TEXTO */
+.card h3 {
+    margin: 10px 0;
+}
+
+.card p {
+    font-weight: bold;
+    color: #555;
+}
+
+/* BOTÓN WHATSAPP */
+.card a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #25D366;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+/* HOVER BOTÓN */
+.card a:hover {
+    background-color: #1ebe5d;
+}
+
+/* FOOTER */
+footer {
+    margin-top: 30px;
+    padding: 20px;
+    background: white;
+    border-top: 1px solid rgba(255, 217, 0, 0.575);
+    font-size: 14px;
+}
+/* BOTONES DE FILTRO */
+.filtros {
+    margin: 20px;
+}
+
+.filtros button {
+    margin: 5px;
+    padding: 10px 15px;
+    border: none;
+    background-color: rgba(255, 217, 0, 0.61);
+    color: black;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.filtros button:hover {
+    background-color: #e6c400b2;
+}
